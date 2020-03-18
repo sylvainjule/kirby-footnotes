@@ -38,14 +38,12 @@ Each footnote must start with a caret (`^`) and will be numbered automatically. 
 
 For example, with the default setup this text:
 
-```
-This is a footnote [^Right here!]. Here is a test with a footnote that contains a link. [^ Yes, there is indeed (link: https://getkirby.com text: a link.)]. And, well, just to be sure things are working I'm throwing a third footnote in here. [^ All good!].
-```
+
+> This is a footnote [^Right here!]. Here is a test with a footnote that contains a link. [^ Yes, there is indeed (link: https://getkirby.com text: a link.)]. And, well, just to be sure things are working I'm throwing a third footnote in here. [^ All good!].
 
 Will show:
 
-
-
+![Footnotes example](https://user-images.githubusercontent.com/14079751/76996677-32e00b80-6952-11ea-8ed5-870981fd0305.jpg)
 
 <br/>
 
