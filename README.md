@@ -51,7 +51,7 @@ Will output:
 
 ## 3. Frontend customization
 
-As you can see with the raw output above, the plugin is completely unopininated. It doesn't ship with any CSS or JS code but provides the markup to adjust its styling to suits your website.
+As you can see with the raw output above, the plugin is completely unopinionated. It doesn't ship with any CSS or JS code but provides the markup to adjust its styling to suits your website.
 
 Here is a reference of the outputted markup and classes to grab for styling:
 
