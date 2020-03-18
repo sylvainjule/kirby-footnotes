@@ -2,6 +2,7 @@
 
 This plugin extends [Kirby 3](http://getkirby.com) with some basic, extremely easy and unopinionated footnote functionalities.
 
+![footnotes-screenshot](https://user-images.githubusercontent.com/14079751/76997929-79cf0080-6954-11ea-87ce-bcb86b9d959f.jpg)
 
 ## Overview
 
@@ -27,7 +28,9 @@ Alternatively, you can install it with composer: ```composer require sylvainjule
 
 ## 2. Basic usage
 
-Use the footnotes method on your field: `$page->text()->footnotes()` or `$page->text()->ft()`. Adding footnotes to your Kirbytext field is simple. Just type them inline in your post in square brackets like this:
+Use the footnotes method on your field: `$page->text()->footnotes()` or `$page->text()->ft()` (no need to call `->kirbytext()` before or after, this method will take care of it).
+
+Adding footnotes to your Kirbytext field is simple. Just type them inline in your post in square brackets like this:
 
 ```
 [^This is a footnote.]
@@ -38,10 +41,9 @@ Each footnote must start with a caret (`^`) and will be numbered automatically. 
 
 For example, with the default setup this text:
 
-
 > This is a footnote [^Right here!]. Here is a test with a footnote that contains a link. [^ Yes, there is indeed (link: https://getkirby.com text: a link.)]. And, well, just to be sure things are working I'm throwing a third footnote in here. [^ All good!].
 
-Will show:
+Will output:
 
 ![Footnotes example](https://user-images.githubusercontent.com/14079751/76996677-32e00b80-6952-11ea-8ed5-870981fd0305.jpg)
 
