@@ -65,7 +65,7 @@ Here is a reference of the outputted markup and classes to grab for styling:
             Right here! <span class="footnotereverse"><a href="#fnref-1">↩</a></span>
         </li>
         <li id="fn-2" value="2">
-            Yes, there is indeed <a href="https://getkirby.com">a link.</a>    <span class="footnotereverse"><a href="#fnref-2">↩</a></span>
+            Yes, there is indeed <a href="https://getkirby.com">a link.</a><span class="footnotereverse"><a href="#fnref-2">↩</a></span>
         </li>
         <li id="fn-3" value="3">
             All good! <span class="footnotereverse"><a href="#fnref-3">↩</a></span>
