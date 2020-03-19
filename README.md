@@ -81,7 +81,7 @@ sup.footnote {}         /* Footnote reference within text */
 .footnotes-container {} /* Footnotes container */
 .footnotes-list {}      /* Footnotes ordered list */
 .footnotes-list li {}   /* Footnote entry */
-.footnotereverse {}     /* Foonote back link ↩ */
+.footnotereverse {}     /* Footnote back link ↩ */
 ```
 
 <br/>
