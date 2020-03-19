@@ -51,7 +51,7 @@ Will output:
 
 ## 3. Frontend customization
 
-As you can see with the raw output above, the plugin is completely unopinionated. It doesn't ship with any CSS or JS code but provides the markup to adjust its styling to suits your website.
+As you can see with the raw output above, the plugin is completely unopinionated. It doesn't ship with any CSS or JS code but provides the markup to adjust its styling to suit your website.
 
 Here is a reference of the outputted markup and classes to grab for styling:
 
@@ -81,6 +81,7 @@ sup.footnote {}         /* Footnote reference within text */
 .footnotes-container {} /* Footnotes container */
 .footnotes-list {}      /* Footnotes ordered list */
 .footnotes-list li {}   /* Footnote entry */
+.footnotereverse {}     /* Foonote back link ↩ */
 ```
 
 <br/>
