@@ -108,6 +108,26 @@ The string displayed at the end of a footnote, linking to its reference within t
 
 If you don't want any return link to appear, set this value to `false`.
 
+### 4.3. Links
+
+If you don't want the footnote references and footnotes to be links, for example if you are displaying them as sidenotes instead of footnotes, set this to `false`. Default is `true`.
+
+```php
+'sylvainjule.footnotes.links'  => false
+```
+
+If set to `false`, the footnote's _back_ link won't be appended to the footnote, and the syntax of the footnote reference within the text changes :
+
+```html
+<!-- from -->
+<sup class="footnote">
+    <a id="fnref-1" href="#fn-1">1</a>
+</sup>
+
+<!-- to -->
+<sup id="fnref-1" class="footnote" data-ref="#fn-1">1</sup>
+```
+
 <br/>
 
 ## 5. Methods
