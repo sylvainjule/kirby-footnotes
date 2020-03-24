@@ -35,7 +35,7 @@ class Footnotes {
             return $only ? $output : $text . $output;
         }
         else {
-            $response = $only ? '' : $text;
+            return $only ? '' : $text;
         }
     }
 
