@@ -106,6 +106,8 @@ The string displayed at the end of a footnote, linking to its reference within t
 'sylvainjule.footnotes.back'  => '&#8617;'
 ```
 
+If you don't want any return link to appear, set this value to `false`.
+
 <br/>
 
 ## 5. Methods
