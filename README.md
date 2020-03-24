@@ -115,6 +115,9 @@ The string displayed at the end of a footnote, linking to its reference within t
 echo $page->text()->footnotes();
 
 // returns the text without footnotes references nor bottom footnotes container
+echo $page->text()->removeFootnotes();
+
+// returns the text with footnotes references but no bottom footnotes container
 echo $page->text()->withoutFootnotes();
 
 // returns only the footnotes container

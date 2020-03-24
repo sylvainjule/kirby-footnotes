@@ -2,8 +2,8 @@
 
 class Footnotes {
 
-    public static function convert($text, $without = false, $only = false) {
-        $text = kirbytext($text);
+    public static function convert($text, $remove = false, $without = false, $only = false, $kt = true) {
+        $text = $kt ? kirbytext($text) : $text;
 
         $matches    = null;
         $references = null;
@@ -13,7 +13,7 @@ class Footnotes {
         // if there are notes
         if(preg_match_all('/\[(\^.*?)\]/s', $text, $matches)) {
             // return text without notes if needed
-            if($without) return self::remove($text, $matches);
+            if($remove) return self::remove($text, $matches);
 
             $references = $matches[0];
             $notes      = self::strip($matches);
@@ -32,7 +32,15 @@ class Footnotes {
 
             $output = snippet('footnotes_container', ['footnotes' => $notesStr], true);
 
-            return $only ? $output : $text . $output;
+            if($only) { // return only the footnotes
+                return $output;
+            }
+            elseif($without) { // return only the text with footnotes' numbers
+                return $text;
+            }
+            else {
+                return $text . $output;
+            }
         }
         else {
             return $only ? '' : $text;

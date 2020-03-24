@@ -14,11 +14,14 @@ Kirby::plugin('sylvainjule/footnotes', [
         'ft' => function($field) {
             return $field->footnotes();
         },
-        'withoutFootnotes' => function($field) {
+        'removeFootnotes' => function($field) {
             return Footnotes::convert($field->text(), true);
         },
-        'onlyFootnotes' => function($field) {
+        'withoutFootnotes' => function($field) {
             return Footnotes::convert($field->text(), false, true);
+        },
+        'onlyFootnotes' => function($field) {
+            return Footnotes::convert($field->text(), false, false, true);
         },
     ],
     'snippets'     => [
