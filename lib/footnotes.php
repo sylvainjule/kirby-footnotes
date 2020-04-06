@@ -22,14 +22,8 @@ class Footnotes {
             $order = 1;
 
             foreach($notes as $key => $note) {
-                $data = ['count' => $count, 'order' => $order, 'note' => $note];
-
-                // replace only the first occurence
-                $pos = strpos($text, $references[$key]);
-                if ($pos !== false) {
-                    $text = substr_replace($text, snippet('footnotes_reference', $data, true), $pos, strlen($references[$key]));
-                }
-
+                $data      = ['count' => $count, 'order' => $order, 'note' => $note];
+                $text      = self::str_replace_first($references[$key], snippet('footnotes_reference', $data, true), $text);
                 $notesStr .= snippet('footnotes_entry', $data, true);
 
                 $count++;
@@ -71,6 +65,13 @@ class Footnotes {
             $text = str_replace($note, '', $text);
         }
         return $text;
+    }
+    public static function str_replace_first($search, $replace, $str) {
+        $pos = strpos($str, $search);
+        if ($pos !== false) {
+            return substr_replace($str, $replace, $pos, strlen($search));
+        }
+        return $str;
     }
 
 }
