@@ -13,8 +13,9 @@ This plugin extends [Kirby 3](http://getkirby.com) with some basic, extremely ea
 - [3. Frontend customization](#3-frontend-customization)
 - [4. Options](#4-options)
 - [5. Methods](#5-methods)
-- [6. License](#6-license)
-- [7. Credits](#7-credits)
+- [6. Compatibility with blocks](#6-compatibility-with-blocks)
+- [7. License](#7-license)
+- [8. Credits](#8-credits)
 
 <br/>
 
@@ -148,12 +149,54 @@ echo $page->text()->onlyFootnotes();
 
 <br/>
 
-## 6. License
+## 6. Compatibility with Blocks
+
+Kirby 3.5 introduced a new `blocks` field, to which the usual `->footnotes()` method won't apply.
+
+There is currently no Blocks methods to hook this plugin onto, so I have put together a **temporary** way of solving the issue until this is added. Please note that it'll require some extra work by manually looping into the Blocks object:
+
+```php
+<?php $blocks  = $page->text()->toBlocks();
+      $startAt = 1;
+      $notes   = [];
+      $applyTo = ['text', 'markdown']; ?>
+
+      <div class="text-container">
+        <?php foreach($blocks as $block):
+              if(in_array($block->type(), $applyTo)):
+                  // we get the text with footnotes references but no bottom footnotes container
+                  $text     = $block->text()->withoutBlocksFootnotes($startAt);
+                  // instead, we get an array of the block's footnotes, and append it to our $notes array
+                  $notesArr = $block->text()->onlyBlocksFootnotes($startAt);
+                  if($notesArr !== '') {
+                    foreach($notesArr as $f) { $notes[] = $f; }
+                  }
+                  // the first note of the next block will now start at (number of current notes + 1)
+                  $startAt = count($notes) + 1;
+                  echo $text;
+              else:
+                echo $block;
+              endif;
+              endforeach; ?>
+        </div>
+
+        // if there were notes
+        <?php if(count($notes)): ?>
+        <div class="notes-container">
+            // we manually call the 'footnotes_container' snippet
+            <?php snippet('footnotes_container', ['footnotes' => implode('', $notes)]) ?>
+        </div>
+        <?php endif; ?>
+```
+
+<br/>
+
+## 7. License
 
 MIT
 
 <br/>
 
-## 7. Credits
+## 8. Credits
 
 This plugin has been built on top of the K2 version by [@distantnative](https://github.com/distantnative/footnotes). 🙏

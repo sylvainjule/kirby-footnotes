@@ -24,6 +24,15 @@ Kirby::plugin('sylvainjule/footnotes', [
         'onlyFootnotes' => function($field) {
             return Footnotes::convert($field->text(), false, false, true);
         },
+
+        /* Temporary solution, waiting for Blocks methods */
+        'withoutBlocksFootnotes' => function($field, $startAt) {
+            return Footnotes::convert($field->text(), false, true, false, false, $startAt);
+        },
+        'onlyBlocksFootnotes' => function($field, $startAt) {
+            return Footnotes::convert($field->text(), false, false, true, false, $startAt, true);
+        }
+
     ],
     'snippets'     => [
         'footnotes_container' => __DIR__ . '/snippets/container.php',
