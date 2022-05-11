@@ -1,5 +1,7 @@
 <?php
 
+use Kirby\Cms\App as Kirby;
+
 require_once __DIR__ . '/lib/footnotes.php';
 
 Kirby::plugin('sylvainjule/footnotes', [
@@ -20,6 +22,10 @@ Kirby::plugin('sylvainjule/footnotes', [
         },
         'withoutFootnotes' => function($field) {
             return Footnotes::convert($field->text(), false, true);
+        },
+        'collectFootnotes' => function($field) {
+            $start = count(Footnotes::$footnotes) + 1;
+            return Footnotes::convert($field->text(), false, true, false, true, $start);
         },
         'onlyFootnotes' => function($field) {
             return Footnotes::convert($field->text(), false, false, true);
