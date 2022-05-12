@@ -39,7 +39,7 @@ class Footnotes {
                 return $output;
             }
             elseif($without) { // return only the text with footnotes' numbers
-                self::$footnotes += $notesArr;
+                self::$footnotes = array_merge(self::$footnotes, $notesArr);
                 return $text;
             }
             else {
