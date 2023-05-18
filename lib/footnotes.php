@@ -3,7 +3,7 @@
 class Footnotes {
 
     public static function convert($text, $remove = false, $without = false, $only = false, $kt = true, $startAt = 1, $unwrapped = false) {
-        $text = $kt ? kirbytext($text) : $text;
+        $text = $kt ? kirbytext($text, ['parent' => $text->parent()]) : $text;
 
         $matches    = null;
         $references = null;
