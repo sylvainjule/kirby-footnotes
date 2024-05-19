@@ -13,7 +13,7 @@ class Footnotes {
         $notesArr   = [];
 
         // if there are notes
-        if(preg_match_all('/\[(\^.*?)\]/s', $text, $matches)) {
+        if(preg_match_all('/\[(\^.*?)(?<!\\\)\]/s', $text, $matches)) {
             // return text without notes if needed
             if($remove) return self::remove($text, $matches);
 
@@ -58,7 +58,7 @@ class Footnotes {
         if($unwrapped) {
             return $footnotes;
         } else {
-            return snippet('footnotes_container', ['footnotes' => join("", $footnotes)], true);
+            return snippet('footnotes_container', ['footnotes' => join('', $footnotes)], true);
         }
     }
 
@@ -70,7 +70,7 @@ class Footnotes {
     }
     public static function strip($matches) {
         return array_map(function($match) use($matches) {
-          $match = preg_replace('/\[(\^(.*?))\]/s', '\2', $match);
+          $match = preg_replace('/\[(\^(.*?))(?<!\\\)\]/s', '\2', $match);
           $match = str_replace(array('<p>','</p>'), '', kirbytext($match));
           return $match;
         }, $matches[0]);

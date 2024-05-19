@@ -40,7 +40,13 @@ Adding footnotes to your Kirbytext field is simple. Just type them inline in you
 [^ This is another.]
 ```
 
-Each footnote must start with a caret (`^`) and will be numbered automatically. Footnotes can contain anything you want including links or images, but please note that **you should not include square brackets [] inside a footnote.**
+Each footnote must start with a caret (`^`) and will be numbered automatically. Footnotes can contain anything you want including links or images, but please note that **you should not include unescaped square brackets [] inside a footnote.**
+
+If you add square brackets in a note (`This is a truncated […] quote` for example), you must escape the closing bracket belonging to the note:
+
+```
+[^ This is a truncated […\] quote]
+```
 
 For example, with the default setup this text:
 
@@ -86,7 +92,6 @@ echo $page->blocks->toBlocks()->collectFootnotes();
 // echo the footnotes container with all collected footnotes
 echo Footnotes::footnotes();
 ```
-
 
 <br/>
 
