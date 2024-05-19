@@ -69,7 +69,7 @@ echo $page->text1()->collectFootnotes();
 // somewhere else in your template
 echo $page->text2()->collectFootnotes();
 
-// at the end of you template,
+// at the end of your template,
 // echo the footnotes container with all collected footnotes
 echo Footnotes::footnotes();
 ```
@@ -82,7 +82,7 @@ The plugins provides a `collectFootnotes()` blocks method, intended to collect a
 // collect the footnotes and return the html with footnotes references
 echo $page->blocks->toBlocks()->collectFootnotes();
 
-// at the end of you template,
+// at the end of your template,
 // echo the footnotes container with all collected footnotes
 echo Footnotes::footnotes();
 ```
