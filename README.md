@@ -145,6 +145,13 @@ echo $page->text()->withoutFootnotes();
 
 // returns only the footnotes container
 echo $page->text()->onlyFootnotes();
+
+// returns the text with footnotes references, no footnotes container, but stores the footnotes container for later use
+echo $page->text1()->collectFootnotes();
+echo $page->text2()->collectFootnotes();
+
+// returns the footnotes container with all collected footnotes and clears the memory
+echo Footnotes::footnotes();
 ```
 
 <br/>

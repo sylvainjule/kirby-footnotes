@@ -1,6 +1,7 @@
 <?php
 
 class Footnotes {
+    public static array $footnotes = [];
 
     public static function convert($text, $remove = false, $without = false, $only = false, $kt = true, $startAt = 1, $unwrapped = false) {
         $text = $kt ? kirbytext($text, ['parent' => $text->parent()]) : $text;
@@ -38,6 +39,7 @@ class Footnotes {
                 return $output;
             }
             elseif($without) { // return only the text with footnotes' numbers
+                self::$footnotes = array_merge(self::$footnotes, $notesArr);
                 return $text;
             }
             else {
@@ -46,6 +48,17 @@ class Footnotes {
         }
         else {
             return $only ? '' : $text;
+        }
+    }
+
+    public static function footnotes($purge = true, $unwrapped = false) {
+        $footnotes = self::$footnotes;
+        if($purge) self::$footnotes = [];
+
+        if($unwrapped) {
+            return $footnotes;
+        } else {
+            return snippet('footnotes_container', ['footnotes' => join("", $footnotes)], true);
         }
     }
 
