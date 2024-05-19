@@ -1,6 +1,6 @@
 {
     "name": "sylvainjule/footnotes",
-    "description": "Footnotes plugin for Kirby 3",
+    "description": "Footnotes plugin for Kirby 3 and 4",
     "type": "kirby-plugin",
     "license": "MIT",
     "authors": [

@@ -1,19 +1,21 @@
 # Kirby Footnotes
 
-This plugin extends [Kirby 3](http://getkirby.com) with some basic, extremely easy and unopinionated footnote functionalities.
+This plugin extends [Kirby 3 and 4](http://getkirby.com) with some basic, extremely easy and unopinionated footnote functionalities.
 
 ![footnotes-screenshot](https://user-images.githubusercontent.com/14079751/76997929-79cf0080-6954-11ea-87ce-bcb86b9d959f.jpg)
 
 ## Overview
 
-> This plugin is completely free and published under the MIT license. However, if you are using it in a commercial project and want to help me keep up with maintenance, please consider [making a donation of your choice](https://www.paypal.me/sylvainjl) or purchasing your license(s) through [my affiliate link](https://a.paddle.com/v2/click/1129/36369?link=1170).
+> This plugin is completely free and published under the MIT license. However, if you are using it in a commercial project and want to help me keep up with maintenance, please consider [making a donation of your choice](https://www.paypal.me/sylvainjl).
 
 - [1. Installation](#1-installation)
 - [2. Basic usage](#2-basic-usage)
-- [3. Frontend customization](#3-frontend-customization)
-- [4. Options](#4-options)
-- [5. Methods](#5-methods)
-- [6. Compatibility with blocks](#6-compatibility-with-blocks)
+- [3. Advanced usage](#3-advanced-usage)
+  * [3.1. Collect notes from multiple fields](#31-collect-notes-from-multiple-fields)
+  * [3.2. Usage with blocks](#32-usage-with-blocks)
+- [4. Frontend customization](#4-frontend-customization)
+- [5. Options](#5-options)
+- [6. Methods](#6-methods)
 - [7. License](#7-license)
 - [8. Credits](#8-credits)
 
@@ -50,7 +52,45 @@ Will output:
 
 <br/>
 
-## 3. Frontend customization
+## 3. Advanced usage
+
+### 3.1. Collect notes from multiple fields
+
+If you have multiple fields on your page you'd like to collect footnotes from, an output a signle container at the end of your page, instead of using the `footnotes()` method, you can use the `collectFootnotes()` one.
+
+This method will return the text with footnotes references, no footnotes container, and store the footnotes container for later use.
+
+For example:
+
+```php
+// somewhere in your template
+echo $page->text1()->collectFootnotes();
+
+// somewhere else in your template
+echo $page->text2()->collectFootnotes();
+
+// at the end of you template,
+// echo the footnotes container with all collected footnotes
+echo Footnotes::footnotes();
+```
+
+### 3.2. Usage with blocks
+
+The plugins provides a `collectFootnotes()` blocks method, intended to collect all footnotes found in the converted blocks (you need to chain it after the `toBlocks()` method). 
+
+```php
+// collect the footnotes and return the html with footnotes references
+echo $page->blocks->toBlocks()->collectFootnotes();
+
+// at the end of you template,
+// echo the footnotes container with all collected footnotes
+echo Footnotes::footnotes();
+```
+
+
+<br/>
+
+## 4. Frontend customization
 
 As you can see with the raw output above, the plugin is completely unopinionated. It doesn't ship with any CSS or JS code but provides the markup to adjust its styling to suit your website.
 
@@ -87,11 +127,11 @@ sup.footnote {}         /* Footnote reference within text */
 
 <br/>
 
-## 4. Options
+## 5. Options
 
 There are a few options:
 
-### 4.1. Wrapper
+### 5.1. Wrapper
 
 For semantic purposes, you can manually set which HTML tag to use as footnotes container, `aside`, `footer`, etc. (default is a simple `div`)
 
@@ -99,7 +139,7 @@ For semantic purposes, you can manually set which HTML tag to use as footnotes c
 'sylvainjule.footnotes.wrapper'  => 'div'
 ```
 
-### 4.2. Back
+### 5.2. Back
 
 The string displayed at the end of a footnote, linking to its reference within the text. Default is `&#8617;` / ↩.
 
@@ -109,7 +149,7 @@ The string displayed at the end of a footnote, linking to its reference within t
 
 If you don't want any return link to appear, set this value to `false`.
 
-### 4.3. Links
+### 5.3. Links
 
 If you don't want the footnote references and footnotes to be links, for example if you are displaying them as sidenotes instead of footnotes, set this to `false`. Default is `true`.
 
@@ -131,7 +171,7 @@ If set to `false`, the footnote's _back_ link won't be appended to the footnote,
 
 <br/>
 
-## 5. Methods
+## 6. Methods
 
 ```php
 // returns the text with footnotes references and a bottom footnote container
@@ -152,48 +192,6 @@ echo $page->text2()->collectFootnotes();
 
 // returns the footnotes container with all collected footnotes and clears the memory
 echo Footnotes::footnotes();
-```
-
-<br/>
-
-## 6. Compatibility with Blocks
-
-Kirby 3.5 introduced a new `blocks` field, to which the usual `->footnotes()` method won't apply.
-
-There is currently no Blocks methods to hook this plugin onto, so I have put together a **temporary** way of solving the issue until this is added. Please note that it'll require some extra work by manually looping into the Blocks object:
-
-```php
-<?php $blocks  = $page->text()->toBlocks();
-      $startAt = 1;
-      $notes   = [];
-      $applyTo = ['text', 'markdown']; ?>
-
-      <div class="text-container">
-        <?php foreach($blocks as $block):
-              if(in_array($block->type(), $applyTo)):
-                  // we get the text with footnotes references but no bottom footnotes container
-                  $text     = $block->text()->withoutBlocksFootnotes($startAt);
-                  // instead, we get an array of the block's footnotes, and append it to our $notes array
-                  $notesArr = $block->text()->onlyBlocksFootnotes($startAt);
-                  if($notesArr !== '') {
-                    foreach($notesArr as $f) { $notes[] = $f; }
-                  }
-                  // the first note of the next block will now start at (number of current notes + 1)
-                  $startAt = count($notes) + 1;
-                  echo $text;
-              else:
-                echo $block;
-              endif;
-              endforeach; ?>
-        </div>
-
-        // if there were notes
-        <?php if(count($notes)): ?>
-        <div class="notes-container">
-            // we manually call the 'footnotes_container' snippet
-            <?php snippet('footnotes_container', ['footnotes' => implode('', $notes)]) ?>
-        </div>
-        <?php endif; ?>
 ```
 
 <br/>

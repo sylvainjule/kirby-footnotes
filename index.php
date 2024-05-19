@@ -17,28 +17,25 @@ Kirby::plugin('sylvainjule/footnotes', [
         'ft' => function($field) {
             return $field->footnotes();
         },
+        'collectFootnotes' => function($field) {
+            $start = count(Footnotes::$footnotes) + 1;
+            return Footnotes::convert($field->text(), false, true, false, true, $start);
+        },
         'removeFootnotes' => function($field) {
             return Footnotes::convert($field->text(), true);
         },
         'withoutFootnotes' => function($field) {
             return Footnotes::convert($field->text(), false, true);
         },
-        'collectFootnotes' => function($field) {
-            $start = count(Footnotes::$footnotes) + 1;
-            return Footnotes::convert($field->text(), false, true, false, true, $start);
-        },
         'onlyFootnotes' => function($field) {
             return Footnotes::convert($field->text(), false, false, true);
         },
-
-        /* Temporary solution, waiting for Blocks methods */
-        'withoutBlocksFootnotes' => function($field, $startAt) {
-            return Footnotes::convert($field->text(), false, true, false, false, $startAt);
+    ],
+    'blocksMethods' => [
+        'collectFootnotes' => function() {
+            $start = count(Footnotes::$footnotes) + 1;
+            return Footnotes::convert($this->toHtml(), false, true, false, false, $start);
         },
-        'onlyBlocksFootnotes' => function($field, $startAt) {
-            return Footnotes::convert($field->text(), false, false, true, false, $startAt, true);
-        }
-
     ],
     'snippets'     => [
         'footnotes_container' => __DIR__ . '/snippets/container.php',
