@@ -6,7 +6,7 @@ This plugin extends [Kirby 3, 4 and 5](http://getkirby.com) with some basic, ext
 
 ## Overview
 
-> This plugin is completely free and published under the MIT license. However, if you are using it in a commercial project and want to help me keep up with maintenance, please consider [making a donation of your choice](https://www.paypal.me/sylvainjl).
+> This plugin is completely free and published under the MIT license. However, if you are using it in a commercial project and want to help me keep up with maintenance, you can consider [making a donation of your choice](https://www.paypal.me/sylvainjl).
 
 - [1. Installation](#1-installation)
 - [2. Basic usage](#2-basic-usage)
@@ -103,18 +103,18 @@ Here is a reference of the outputted markup and classes to grab for styling:
 
 ```html
 <p>
-    This is a footnote.<sup class="footnote"><a id="fnref-1" href="#fn-1">1</a></sup> Here is a test with a footnote that contains a link.<sup class="footnote"><a id="fnref-2" href="#fn-2">2</a></sup> And, well, just to be sure things are working I'm throwing a third footnote in here.<sup class="footnote"><a id="fnref-3" href="#fn-3">3</a></sup>
+    This is a footnote.<sup class="footnote"><a id="fnref-1" href="#fn-1" aria-describedby="fn-1">1</a></sup> Here is a test with a footnote that contains a link.<sup class="footnote"><a id="fnref-2" href="#fn-2" aria-describedby="fn-2">2</a></sup> And, well, just to be sure things are working I'm throwing a third footnote in here.<sup class="footnote"><a id="fnref-3" href="#fn-3" aria-describedby="fn-3">3</a></sup>
 </p>
 <div id="footnotes" class="footnotes-container">
     <ol class="footnotes-list">
         <li id="fn-1" value="1">
-            Right here! <span class="footnotereverse"><a href="#fnref-1">↩</a></span>
+            Right here! <span class="footnotereverse"><a href="#fnref-1" title="Back to content 1">↩</a></span>
         </li>
         <li id="fn-2" value="2">
-            Yes, there is indeed <a href="https://getkirby.com">a link.</a><span class="footnotereverse"><a href="#fnref-2">↩</a></span>
+            Yes, there is indeed <a href="https://getkirby.com">a link.</a><span class="footnotereverse"><a href="#fnref-2" title="Back to content 2">↩</a></span>
         </li>
         <li id="fn-3" value="3">
-            All good! <span class="footnotereverse"><a href="#fnref-3">↩</a></span>
+            All good! <span class="footnotereverse"><a href="#fnref-3" title="Back to content 3">↩</a></span>
         </li>
     </ol>
 </div>
