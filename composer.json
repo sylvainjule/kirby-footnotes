@@ -1,9 +1,9 @@
 {
     "name": "sylvainjule/footnotes",
-    "description": "Footnotes plugin for Kirby 3 and 4",
+    "description": "Footnotes plugin for Kirby 3, 4 and 5",
     "type": "kirby-plugin",
     "license": "MIT",
-    "version": "2.0.0",
+    "version": "2.1.0",
     "authors": [
         {
             "name": "Sylvain Julé",
