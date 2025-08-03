@@ -174,6 +174,24 @@ If set to `false`, the footnote's _back_ link won't be appended to the footnote,
 <sup id="fnref-1" class="footnote" data-ref="#fn-1">1</sup>
 ```
 
+### 5.4. Snippets
+
+If you want to overwrite one of [the default snippets](https://github.com/sylvainjule/kirby-footnotes/tree/master/snippets), you can place a file sharing the same name in your `site/snippets` folder.
+If you want to register a custom name / path for one of these 3 snippets, you can do so from your config file:
+
+```php
+'sylvainjule.footnotes.snippet.container' => 'footnotes_container',
+'sylvainjule.footnotes.snippet.entry'     => 'footnotes_entry',
+'sylvainjule.footnotes.snippet.reference' => 'footnotes_reference'
+
+↓
+
+'sylvainjule.footnotes.snippet.container' => 'custom/path/to/footnotes_container',
+'sylvainjule.footnotes.snippet.entry'     => 'custom/path/to/footnotes_entry',
+'sylvainjule.footnotes.snippet.reference' => 'custom/path/to/footnotes_reference'
+```
+
+
 <br/>
 
 ## 6. Methods

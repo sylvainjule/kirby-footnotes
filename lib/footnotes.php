@@ -25,15 +25,15 @@ class Footnotes {
 
             foreach($notes as $key => $note) {
                 $data       = ['count' => $count, 'order' => $order, 'note' => $note];
-                $text       = self::str_replace_first($references[$key], snippet('footnotes_reference', $data, true), $text);
-                $notesStr  .= snippet('footnotes_entry', $data, true);
-                $notesArr[] = snippet('footnotes_entry', $data, true);
+                $text       = self::str_replace_first($references[$key], snippet(option('sylvainjule.footnotes.snippet.reference'), $data, true), $text);
+                $notesStr  .= snippet(option('sylvainjule.footnotes.snippet.entry'), $data, true);
+                $notesArr[] = snippet(option('sylvainjule.footnotes.snippet.entry'), $data, true);
 
                 $count++;
                 $order++;
             }
 
-            $output = $unwrapped ? $notesArr : snippet('footnotes_container', ['footnotes' => $notesStr], true);
+            $output = $unwrapped ? $notesArr : snippet(option('sylvainjule.footnotes.snippet.container'), ['footnotes' => $notesStr], true);
 
             if($only) { // return only the footnotes
                 return $output;
@@ -58,7 +58,7 @@ class Footnotes {
         if($unwrapped) {
             return $footnotes;
         } else {
-            return snippet('footnotes_container', ['footnotes' => join('', $footnotes)], true);
+            return snippet(option('sylvainjule.footnotes.snippet.container'), ['footnotes' => join('', $footnotes)], true);
         }
     }
 

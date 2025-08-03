@@ -9,6 +9,9 @@ Kirby::plugin('sylvainjule/footnotes', [
         'wrapper'  => 'div',
         'back'     => '&#8617;',
         'links'    => true,
+        'snippet.container' => 'footnotes_container',
+        'snippet.entry'     => 'footnotes_entry',
+        'snippet.reference' => 'footnotes_reference',
     ),
     'fieldMethods' => [
         'footnotes' => function($field) {
