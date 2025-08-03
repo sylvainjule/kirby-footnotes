@@ -1,6 +1,6 @@
 # Kirby Footnotes
 
-This plugin extends [Kirby 3 and 4](http://getkirby.com) with some basic, extremely easy and unopinionated footnote functionalities.
+This plugin extends [Kirby 3, 4 and 5](http://getkirby.com) with some basic, extremely easy and unopinionated footnote functionalities.
 
 ![footnotes-screenshot](https://user-images.githubusercontent.com/14079751/76997929-79cf0080-6954-11ea-87ce-bcb86b9d959f.jpg)
 
