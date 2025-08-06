@@ -176,7 +176,7 @@ If set to `false`, the footnote's _back_ link won't be appended to the footnote,
 
 ### 5.4. Snippets
 
-If you want to overwrite one of [the default snippets](https://github.com/sylvainjule/kirby-footnotes/tree/master/snippets), you can place a file sharing the same name in your `site/snippets` folder.
+If you want to overwrite one of [the default snippets](https://github.com/sylvainjule/kirby-footnotes/blob/bc029e4134d92915ff69e7403e61075900449463/index.php#L43-L47), you can place a file sharing the same name (starting with `footnotes_`) in your `site/snippets` folder.
 If you want to register a custom name / path for one of these 3 snippets, you can do so from your config file:
 
 ```php
