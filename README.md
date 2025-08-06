@@ -159,8 +159,8 @@ If you don't want any return link to appear, set this value to `false`.
 The title attribute set on the return link for accessibility purposes. Default is `Back to content {{index}}` (in english, see [this folder](https://github.com/sylvainjule/kirby-footnotes/tree/master/lib/languages) for all available translations — don’t hesitate to PR one if missing). You custom title will be suffixed with the `{{index}}` of the footnote.
 
 ```php
-'sylvainjule.footnotes.back.title'  => 'Back to content' // -> 'Back to content 1', 'Back to content 2', etc.
-'sylvainjule.footnotes.back.title'  => 'Custom title'    // -> 'Custom title 1', 'Custom title 2', etc.
+'sylvainjule.footnotes.back.title'  => 'Back to content', // -> 'Back to content 1', 'Back to content 2', etc.
+'sylvainjule.footnotes.back.title'  => 'Custom title',    // -> 'Custom title 1', 'Custom title 2', etc.
 ```
 
 If you don't want any return link to appear, set this value to `false`.
