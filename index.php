@@ -6,12 +6,13 @@ require_once __DIR__ . '/lib/footnotes.php';
 
 Kirby::plugin('sylvainjule/footnotes', [
     'options' => array(
-        'wrapper'  => 'div',
-        'back'     => '&#8617;',
-        'links'    => true,
+        'wrapper'           => 'div',
+        'back'              => '&#8617;',
+        'links'             => true,
         'snippet.container' => 'footnotes_container',
         'snippet.entry'     => 'footnotes_entry',
         'snippet.reference' => 'footnotes_reference',
+        'back.title'        => null,
     ),
     'fieldMethods' => [
         'footnotes' => function($field) {
@@ -40,6 +41,10 @@ Kirby::plugin('sylvainjule/footnotes', [
             return Footnotes::convert($this->toHtml(), false, true, false, false, $start);
         },
     ],
+    'translations' => array(
+        'en' => require_once __DIR__ . '/lib/languages/en.php',
+        'fr' => require_once __DIR__ . '/lib/languages/fr.php',
+    ),
     'snippets'     => [
         'footnotes_container' => __DIR__ . '/snippets/container.php',
         'footnotes_entry'     => __DIR__ . '/snippets/entry.php',

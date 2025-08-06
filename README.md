@@ -154,7 +154,18 @@ The string displayed at the end of a footnote, linking to its reference within t
 
 If you don't want any return link to appear, set this value to `false`.
 
-### 5.3. Links
+### 5.3. Back title
+
+The title attribute set on the return link for accessibility purposes. Default is `Back to content {{index}}` (in english, see [this folder](https://github.com/sylvainjule/kirby-footnotes/tree/master/lib/languages) for all available translations — don’t hesitate to PR one if missing). You custom title will be suffixed with the `{{index}}` of the footnote.
+
+```php
+'sylvainjule.footnotes.back.title'  => 'Back to content' // -> 'Back to content 1', 'Back to content 2', etc.
+'sylvainjule.footnotes.back.title'  => 'Custom title'    // -> 'Custom title 1', 'Custom title 2', etc.
+```
+
+If you don't want any return link to appear, set this value to `false`.
+
+### 5.4. Links
 
 If you don't want the footnote references and footnotes to be links, for example if you are displaying them as sidenotes instead of footnotes, set this to `false`. Default is `true`.
 
@@ -174,9 +185,9 @@ If set to `false`, the footnote's _back_ link won't be appended to the footnote,
 <sup id="fnref-1" class="footnote" data-ref="#fn-1">1</sup>
 ```
 
-### 5.4. Snippets
+### 5.5. Snippets
 
-If you want to overwrite one of [the default snippets](https://github.com/sylvainjule/kirby-footnotes/blob/bc029e4134d92915ff69e7403e61075900449463/index.php#L43-L47), you can place a file sharing the same name (starting with `footnotes_`) in your `site/snippets` folder.
+If you want to overwrite one of [the default snippets](https://github.com/sylvainjule/kirby-footnotes/tree/master/snippets), you can place a file sharing the same name in your `site/snippets` folder.
 If you want to register a custom name / path for one of these 3 snippets, you can do so from your config file:
 
 ```php
