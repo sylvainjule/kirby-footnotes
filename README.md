@@ -43,14 +43,28 @@ Adding footnotes to your Kirbytext field is simple. Just type them inline in you
 
 ### Auto
 
-The original, unopinionated syntax. Just write the footnote inline and it gets numbered automatically, in the order it appears in the text:
+The original, unopinionated syntax. Just write the footnote inline and it gets numbered automatically, in the order it appears in the text. Stick with this unless you have a specific reason to control the number yourself, it's the simplest option and needs no bookkeeping.
 
 ```
 [^This is a footnote.]
 [^ This is another.]
 ```
 
-Stick with this unless you have a specific reason to control the number yourself — it's the simplest option and needs no bookkeeping.
+Footnotes can contain anything you want including links or images, but please note that **you should not include unescaped square brackets [] inside a footnote.**
+
+If you add square brackets in a note (`This is a truncated […] quote` for example), you must escape the closing bracket belonging to the note:
+
+```
+[^ This is a truncated […\] quote]
+```
+
+For example, with the default setup this text:
+
+> This is a footnote.[^Right here!] Here is a test with a footnote that contains a link.[^ Yes, there is indeed (link: https://getkirby.com text: a link.)] And, well, just to be sure things are working I'm throwing a third footnote in here.[^ All good!]
+
+Will output:
+
+![Footnotes example](https://user-images.githubusercontent.com/14079751/76996677-32e00b80-6952-11ea-8ed5-870981fd0305.jpg)
 
 ### Manual numbering (optional)
 
@@ -80,22 +94,6 @@ Some text.[^ This becomes footnote 2.] More text.[^1: This is pinned to footnote
 ```
 
 The footnotes list at the bottom is always sorted by number (1, 2, 3, …), even when a pin makes the reference order in the text non-sequential.
-
-Footnotes can contain anything you want including links or images, but please note that **you should not include unescaped square brackets [] inside a footnote.**
-
-If you add square brackets in a note (`This is a truncated […] quote` for example), you must escape the closing bracket belonging to the note:
-
-```
-[^ This is a truncated […\] quote]
-```
-
-For example, with the default setup this text:
-
-> This is a footnote.[^Right here!] Here is a test with a footnote that contains a link.[^ Yes, there is indeed (link: https://getkirby.com text: a link.)] And, well, just to be sure things are working I'm throwing a third footnote in here.[^ All good!]
-
-Will output:
-
-![Footnotes example](https://user-images.githubusercontent.com/14079751/76996677-32e00b80-6952-11ea-8ed5-870981fd0305.jpg)
 
 <br/>
 
