@@ -13,7 +13,7 @@ Kirby::plugin('sylvainjule/footnotes', [
         'snippet.entry'     => 'footnotes_entry',
         'snippet.reference' => 'footnotes_reference',
         'back.title'        => null,
-        'pinning'           => true,
+        'pinning'           => false,
     ),
     'fieldMethods' => [
         'footnotes' => function($field) {
