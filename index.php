@@ -13,6 +13,7 @@ Kirby::plugin('sylvainjule/footnotes', [
         'snippet.entry'     => 'footnotes_entry',
         'snippet.reference' => 'footnotes_reference',
         'back.title'        => null,
+        'pinning'           => true,
     ),
     'fieldMethods' => [
         'footnotes' => function($field) {
@@ -22,8 +23,7 @@ Kirby::plugin('sylvainjule/footnotes', [
             return $field->footnotes();
         },
         'collectFootnotes' => function($field) {
-            $start = count(Footnotes::$footnotes) + 1;
-            return Footnotes::convert($field->text(), false, true, false, true, $start);
+            return Footnotes::collect($field->text());
         },
         'removeFootnotes' => function($field) {
             return Footnotes::convert($field->text(), true);
@@ -37,8 +37,7 @@ Kirby::plugin('sylvainjule/footnotes', [
     ],
     'blocksMethods' => [
         'collectFootnotes' => function() {
-            $start = count(Footnotes::$footnotes) + 1;
-            return Footnotes::convert($this->toHtml(), false, true, false, false, $start);
+            return Footnotes::collect($this->toHtml(), false);
         },
     ],
     'translations' => array(

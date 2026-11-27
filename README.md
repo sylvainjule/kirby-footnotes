@@ -10,10 +10,16 @@ This plugin extends [Kirby 3, 4 and 5](http://getkirby.com) with some basic, ext
 
 - [1. Installation](#1-installation)
 - [2. Basic usage](#2-basic-usage)
+  * [Auto (recommended)](#auto-recommended)
+  * [Manual numbering (optional)](#manual-numbering-optional)
+  * [Mix](#mix)
 - [3. Advanced usage](#3-advanced-usage)
   * [3.1. Collect notes from multiple fields](#31-collect-notes-from-multiple-fields)
   * [3.2. Usage with blocks](#32-usage-with-blocks)
+  * [3.3. Collect pinned footnotes from multiple fields](#33-collect-pinned-footnotes-from-multiple-fields)
 - [4. Frontend customization](#4-frontend-customization)
+  * [4.1. Markup and styling](#41-markup-and-styling)
+  * [4.2. Custom snippets](#42-custom-snippets)
 - [5. Options](#5-options)
 - [6. Methods](#6-methods)
 - [7. License](#7-license)
@@ -35,7 +41,7 @@ Use the footnotes method on your field: `$page->text()->footnotes()` or `$page->
 
 Adding footnotes to your Kirbytext field is simple. Just type them inline in your post in square brackets, starting with a caret (`^`). There are three ways to number them — mix and match freely within the same text:
 
-### Auto (recommended)
+### Auto
 
 The original, unopinionated syntax. Just write the footnote inline and it gets numbered automatically, in the order it appears in the text:
 
@@ -46,9 +52,15 @@ The original, unopinionated syntax. Just write the footnote inline and it gets n
 
 Stick with this unless you have a specific reason to control the number yourself — it's the simplest option and needs no bookkeeping.
 
-### Manual
+### Manual numbering (optional)
 
-Pin a footnote to an explicit number by prefixing the note with `N:` (the number, a colon, then the text):
+Manual footnote numbering and repeated references are disabled by default to preserve backwards compatibility with existing content. To enable them, add the following option to your `config.php`:
+
+```php
+'sylvainjule.footnotes.pinning' => true,
+```
+
+When enabled, pin a footnote to an explicit number by prefixing the note with `N:` (the number, a colon, then the text):
 
 ```
 [^1: This is always footnote number one.]
@@ -61,7 +73,7 @@ Reusing the same pin elsewhere in the text (`[^1:]`, with or without repeating t
 
 ### Mix
 
-Pin the notes where the number matters, leave the rest on auto — they'll number themselves around whatever's pinned, in the order they appear:
+When the `pinning` option is enabled, pin the notes where the number matters and leave the rest on auto. They'll number themselves around whatever's pinned, in the order they appear:
 
 ```
 Some text.[^ This becomes footnote 2.] More text.[^1: This is pinned to footnote 1.] Even more.[^ This becomes footnote 3.]
@@ -126,6 +138,8 @@ echo Footnotes::footnotes();
 
 ## 4. Frontend customization
 
+### 4.1. Markup and styling
+
 As you can see with the raw output above, the plugin is completely unopinionated. It doesn't ship with any CSS or JS code but provides the markup to adjust its styling to suit your website.
 
 Here is a reference of the outputted markup and classes to grab for styling:
@@ -158,6 +172,32 @@ sup.footnote {}         /* Footnote reference within text */
 .footnotes-list li {}   /* Footnote entry */
 .footnotereverse {}     /* Footnote back link ↩ */
 ```
+
+### 4.2. Custom snippets
+
+The plugin provides three snippets that can be overwritten to customize the generated markup. See the [snippet options](#55-snippets) for more information.
+
+The following variables are available in both the `footnotes_reference` and `footnotes_entry` snippets:
+
+| Variable | Description |
+| --- | --- |
+| `$count` | Unique identifier of the reference. In the entry snippet, it corresponds to the first reference to the footnote. |
+| `$order` | Displayed footnote number. |
+| `$note` | HTML content of the footnote. |
+| `$entryId` | Unique identifier of the footnote entry, shared by all references to the same footnote. |
+| `$refs` | Array of reference identifiers associated with the footnote. |
+
+When pinning is disabled, `$count`, `$order` and `$entryId` are identical, and `$refs` contains a single identifier. Existing custom snippets do not require any changes.
+
+When pinning is enabled, the displayed footnote number (`$order`) may differ from its identifier (`$entryId`). Multiple references may also point to the same entry.
+To support pinned footnotes in your custom snippets:
+
+- Use `$count` as the identifier of the reference.
+- Use `$entryId` to identify and target the footnote entry.
+- Use `$order` as the displayed footnote number.
+- Iterate over `$refs` to generate a backlink for each reference.
+
+Have a look at the default snippets as a reference.
 
 <br/>
 
@@ -231,6 +271,16 @@ If you want to register a custom name / path for one of these 3 snippets, you ca
 'sylvainjule.footnotes.snippet.reference' => 'custom/path/to/footnotes_reference'
 ```
 
+### 5.6. Pinning
+
+Enable manual footnote numbering and repeated references to the same footnote.
+
+```php
+'sylvainjule.footnotes.pinning' => false,
+```
+
+Disabled by default. When enabled, use `[^N: Text]` to define a pinned footnote and `[^N:]` to reference an existing definition.
+When multiple non-empty definitions share the same number, the plugin keeps the first definition. Undefined references, conflicting definitions and numbering conflicts can be inspected with `Footnotes::diagnostics()`.
 
 <br/>
 
@@ -255,6 +305,9 @@ echo $page->text2()->collectFootnotes();
 
 // returns the footnotes container with all collected footnotes and clears the memory
 echo Footnotes::footnotes();
+
+// returns any issues detected during footnote conversion or collection
+Footnotes::diagnostics();
 ```
 
 <br/>
