@@ -17,22 +17,22 @@ Kirby::plugin('sylvainjule/footnotes', [
     ),
     'fieldMethods' => [
         'footnotes' => function($field) {
-            return Footnotes::convert($field->text());
+            return Footnotes::convert($field);
         },
         'ft' => function($field) {
             return $field->footnotes();
         },
         'collectFootnotes' => function($field) {
-            return Footnotes::collect($field->text());
+            return Footnotes::collect($field);
         },
         'removeFootnotes' => function($field) {
-            return Footnotes::convert($field->text(), true);
+            return Footnotes::convert($field, true);
         },
         'withoutFootnotes' => function($field) {
-            return Footnotes::convert($field->text(), false, true);
+            return Footnotes::convert($field, false, true);
         },
         'onlyFootnotes' => function($field) {
-            return Footnotes::convert($field->text(), false, false, true);
+            return Footnotes::convert($field, false, false, true);
         },
     ],
     'blocksMethods' => [
