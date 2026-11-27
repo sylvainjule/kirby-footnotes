@@ -33,14 +33,43 @@ Alternatively, you can install it with composer: ```composer require sylvainjule
 
 Use the footnotes method on your field: `$page->text()->footnotes()` or `$page->text()->ft()` (no need to call `->kirbytext()` before or after, this method will take care of it).
 
-Adding footnotes to your Kirbytext field is simple. Just type them inline in your post in square brackets like this:
+Adding footnotes to your Kirbytext field is simple. Just type them inline in your post in square brackets, starting with a caret (`^`). There are three ways to number them — mix and match freely within the same text:
+
+### Auto (recommended)
+
+The original, unopinionated syntax. Just write the footnote inline and it gets numbered automatically, in the order it appears in the text:
 
 ```
 [^This is a footnote.]
 [^ This is another.]
 ```
 
-Each footnote must start with a caret (`^`) and will be numbered automatically. Footnotes can contain anything you want including links or images, but please note that **you should not include unescaped square brackets [] inside a footnote.**
+Stick with this unless you have a specific reason to control the number yourself — it's the simplest option and needs no bookkeeping.
+
+### Manual
+
+Pin a footnote to an explicit number by prefixing the note with `N:` (the number, a colon, then the text):
+
+```
+[^1: This is always footnote number one.]
+[^2: This is always footnote number two.]
+```
+
+Useful when the footnote number needs to stay stable regardless of where the reference sits in the text (for example, referencing footnote numbers from an external source, or keeping a specific note pinned to "1" across edits).
+
+Reusing the same pin elsewhere in the text (`[^1:]`, with or without repeating the text) references that same footnote again instead of creating a duplicate — the entry renders once, with one lettered backlink (a, b, c, …) per place it was referenced from.
+
+### Mix
+
+Pin the notes where the number matters, leave the rest on auto — they'll number themselves around whatever's pinned, in the order they appear:
+
+```
+Some text.[^ This becomes footnote 2.] More text.[^1: This is pinned to footnote 1.] Even more.[^ This becomes footnote 3.]
+```
+
+The footnotes list at the bottom is always sorted by number (1, 2, 3, …), even when a pin makes the reference order in the text non-sequential.
+
+Footnotes can contain anything you want including links or images, but please note that **you should not include unescaped square brackets [] inside a footnote.**
 
 If you add square brackets in a note (`This is a truncated […] quote` for example), you must escape the closing bracket belonging to the note:
 
