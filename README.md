@@ -10,9 +10,9 @@ This plugin extends [Kirby 3, 4 and 5](http://getkirby.com) with some basic, ext
 
 - [1. Installation](#1-installation)
 - [2. Basic usage](#2-basic-usage)
-  * [Auto (recommended)](#auto-recommended)
-  * [Manual numbering (optional)](#manual-numbering-optional)
-  * [Mix](#mix)
+  * [2.1. Auto (recommended)](#21-auto-recommended)
+  * [2.2. Manual numbering (optional)](#22-manual-numbering-optional)
+  * [2.3. Mix](#23-mix)
 - [3. Advanced usage](#3-advanced-usage)
   * [3.1. Collect notes from multiple fields](#31-collect-notes-from-multiple-fields)
   * [3.2. Usage with blocks](#32-usage-with-blocks)
@@ -41,7 +41,7 @@ Use the footnotes method on your field: `$page->text()->footnotes()` or `$page->
 
 Adding footnotes to your Kirbytext field is simple. Just type them inline in your post in square brackets, starting with a caret (`^`). There are three ways to number them — mix and match freely within the same text:
 
-### Auto
+### 2.1. Auto
 
 The original, unopinionated syntax. Just write the footnote inline and it gets numbered automatically, in the order it appears in the text. Stick with this unless you have a specific reason to control the number yourself, it's the simplest option and needs no bookkeeping.
 
@@ -66,7 +66,7 @@ Will output:
 
 ![Footnotes example](https://user-images.githubusercontent.com/14079751/76996677-32e00b80-6952-11ea-8ed5-870981fd0305.jpg)
 
-### Manual numbering (optional)
+### 2.2. Manual numbering (optional)
 
 Manual footnote numbering and repeated references are disabled by default to preserve backwards compatibility with existing content. To enable them, add the following option to your `config.php`:
 
@@ -85,7 +85,7 @@ Useful when the footnote number needs to stay stable regardless of where the ref
 
 Reusing the same pin elsewhere in the text (`[^1:]`, with or without repeating the text) references that same footnote again instead of creating a duplicate — the entry renders once, with one lettered backlink (a, b, c, …) per place it was referenced from.
 
-### Mix
+### 2.3. Mix
 
 When the `pinning` option is enabled, pin the notes where the number matters and leave the rest on auto. They'll number themselves around whatever's pinned, in the order they appear:
 
